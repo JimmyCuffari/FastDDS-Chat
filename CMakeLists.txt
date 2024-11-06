@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(FastDDSChat)
+project(FastDDSChat)# VERSION 3.1.0 LANGUAGES C CXX)
+
+add_library(FastDDSChat SHARED src/FastDDSUser.cpp src/FastDDSChat.def)
+
 
 # Windows
 set(OPENSSL_ROOT_DIR "C:/Program Files/OpenSSL-Win64/")
 set(OPENSSL_INCLUDE_DIR "C:/Program Files/OpenSSL-Win64/include")
 set(OPENSSL_LIBRARIES "C:/Program Files/OpenSSL-Win64/lib")
+
+#set(OPENSSL_CRYPTO_LIBRARY "C:/Program Files/OpenSSL-Win64/lib/VC/x64/MD/libcrypto.lib")
+#set(OPENSSL_SSL_LIBRARY "C:/Program Files/OpenSSL-Win64/lib/VC/x64/MD/libssl.lib")
+
 
 #set(OPENSSL_ROOT_DIR "/usr")
 #set(OPENSSL_INCLUDE_DIR "/usr/include/openssl")
@@ -47,5 +54,14 @@ file(GLOB FASTDDS_CHAT_SOURCES_CXX "src/*.cxx")
 #add_executable(DDSHelloWorldSubscriber src/HelloWorldSubscriber.cpp ${DDS_HELLOWORLD_SOURCES_CXX})
 #target_link_libraries(DDSHelloWorldSubscriber fastdds fastcdr)
 
+
 add_executable(FastDDSUser src/FastDDSUser.cpp ${FASTDDS_CHAT_SOURCES_CXX})
+
+
+set_target_properties(FastDDSChat PROPERTIES
+    WINDOWS_EXPORT_ALL_SYMBOLS ON  # Export all symbols in the DLL
+    OUTPUT_NAME "fastddschat"       # Optional: name of the DLL file
+)
+
+
 target_link_libraries(FastDDSUser fastdds fastcdr OpenSSL::SSL OpenSSL::Crypto)

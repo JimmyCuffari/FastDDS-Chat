@@ -1,0 +1,10 @@
+LIBRARY fastddschat
+EXPORTS
+    findIndex
+    viewUsers
+    pub_thread
+    viewUsers
+    addUser
+    removeUser
+    chatUser
+    

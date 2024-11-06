@@ -10,6 +10,7 @@
 #include <thread>
 #include <atomic>
 
+
 // For colors
 #ifdef _WIN32
 #include <windows.h>
@@ -17,6 +18,8 @@
 #include <unistd.h>
 #include <cstdio>
 #endif
+
+
 
 void setTextColor(Color color) {
 #ifdef _WIN32
@@ -35,6 +38,11 @@ void resetTextColor() {
     std::cout << "\033[0m";
 #endif
 }
+
+
+extern "C"
+{
+
 
 std::vector<std::string> endThreadSignal = {};  // Lets threads know to end
 std::vector<std::string> curr_chat_tab = {};    // Tells which tabbed user is currently being talked to (option 3)
@@ -440,4 +448,6 @@ int main()
     std::cout << std::endl << "Thanks for chatting." << std::endl;
 
     resetTextColor();
+}
+
 }
